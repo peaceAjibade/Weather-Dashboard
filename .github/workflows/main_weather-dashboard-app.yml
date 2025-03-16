@@ -42,7 +42,8 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          zip release.zip ./* -r
+          zip -r ../../release.zip . -x "venv/*" "*.git*" "*.github*"
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -71,5 +72,5 @@ jobs:
         with:
           app-name: 'weather-dashboard-app'
           slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_43BBC241F27D4456A41537CDC2BB761E }}
