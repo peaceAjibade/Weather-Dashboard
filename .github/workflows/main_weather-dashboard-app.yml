@@ -46,13 +46,9 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
-          cd backend/weather-api
+          cd ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           zip -r ../../release.zip .
-          cd ../..
-          ls -R
 
-
- 
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
